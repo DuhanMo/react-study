@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App_useEffect from './App_useEffect';
+import App_useMemo from './App_useMemo';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <App/>
+  // <App_useEffect />,
+  <App_useMemo />,
   document.getElementById('root'),
 );
 

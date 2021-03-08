@@ -64,6 +64,8 @@ import Sub from './Sub';
 function App() {
   console.log('App 실행됨');
   // 다운로드 받음
+  const [num, setNum] = useState(5);
+
   let sample = [
     { id: 1, name: '홍길동' },
     { id: 2, name: '장보고' },
@@ -72,9 +74,10 @@ function App() {
   ];
   const [users, setUsers] = useState(sample); // 레퍼런스 변경되야 동작!
   const download = () => {
-    sample.push({ id: 5, name: '조자룡' });
+    // fetch().then().then();
     console.log(sample);
-    setUsers([...sample]);
+    setUsers([...sample, { id: num, name: '조자룡' }]);
+    setNum(num + 1);
   };
   return (
     <div>
