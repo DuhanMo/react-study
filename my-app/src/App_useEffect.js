@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+  console.log('App() 실행됨');
   const [data, setData] = useState(0);
   const [search, setSearch] = useState(0);
 

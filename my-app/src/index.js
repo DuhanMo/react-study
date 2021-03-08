@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+
 import App_useEffect from './App_useEffect';
 import App_useMemo from './App_useMemo';
 import reportWebVitals from './reportWebVitals';
+import App from './App';
+import App_useRef from './App_useRef';
+import App_component from './App_component';
 
 ReactDOM.render(
-  // <App/>
+  // <App />,
   // <App_useEffect />,
-  <App_useMemo />,
+  // <App_useMemo />,
+  // <App_useRef />,
+  <App_component />,
   document.getElementById('root'),
 );
 
