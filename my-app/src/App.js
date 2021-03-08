@@ -14,19 +14,32 @@ import reactDom from 'react-dom';
 // - 내부에 적는 방법
 // - 외부 파일에 적는 방법
 // - 라이브러리 사용 (부트스트랩, component-styled)
-let a = 10;
-const b = 20; // 상수
-function App() {
-  let c;
+// (6) 리액트를 최적화 해주려면 깊은복사를 해야함, (부모 자식 컴포넌트를 다시그리는지에대한 연산 ,..)
 
-  const mystyle = {
-    color: 'red',
-  };
+// function App() {
+
+//   const mystyle = {
+//     color: 'red',
+//   };
+//   return (
+//     <div>
+//       <div style={mystyle}>안녕! {a === 10 ? '10이맞음' : '10이 아님'}</div>
+//       <h1 className="box-style">해딩태그 {b === 20 && '20입니다.'}</h1>
+//       <hr />
+//     </div>
+//   );
+// }
+
+function App() {
+  let list = [1, 2, 3];
+
   return (
     <div>
-      <div style={mystyle}>안녕! {a === 10 ? '10이맞음' : '10이 아님'}</div>
-      <h1 className="box-style">해딩태그 {b === 20 && '20입니다.'}</h1>
-      <hr />
+      <div>
+        {list.map((n) => (
+          <h1>{n}</h1>
+        ))}
+      </div>
     </div>
   );
 }

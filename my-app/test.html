@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // concat, filter, map, slice , spread 연산자
+
+      console.log('1.========= spread 연산자');
+      const a = [1, 2, 3];
+      //   const b = a; 이건 얕은복사라 하면 안됨
+      const b = [...a];
+      b.push(4);
+      console.log(`a의 값은 ${a}`);
+      console.log(`b의 값은 ${b}`);
+
+      console.log('2.========= 추가하기 concat');
+      // 추가하면서 새롭게 만듦
+      const a2 = [1, 2, 3];
+      const b2 = a2.concat(4);
+      console.log(`a2의 값은 ${a2}`);
+      console.log(`b2의 값은 ${b2}`);
+      const c = [0, ...a2, 4, 5];
+      console.log(`spread+concat c2의 값은 ${c}`);
+
+      console.log('3.========= 걸러내기 filter');
+      const a3 = [1, 2, 3];
+      // bool을 return 받는다. true만 걸러낸다.
+      const b3 = a3.filter((n) => {
+        return n != 1;
+      });
+      console.log(`b3의 값은 ${b3}`);
+
+      console.log('4.========= 잘라내기 slice');
+      const a4 = [1, 2, 3];
+      const b4 = a4.slice(0, 2);
+      console.log(b4); //[1,2]
+      console.log('4.1 ========= 잘라내기 slice + spread');
+      const c4 = [...a4.slice(0, 1), 4, ...a4.slice(1)];
+      console.log(c4);
+
+      console.log('5.========= 반복하기 map');
+      const a5 = [1, 2, 3];
+
+      //   a5.forEach((n) => {
+      //     console.log(n);
+      //   }); // 리턴 못함.
+      const b5 = a5.map((n) => n + 15); // const b5 = [...a5];
+      console.log(b5);
+
+      const users = [
+        { id: 1, name: '홍길동', phone: '2222' },
+        { id: 2, name: '김길동', phone: '3333' },
+        { id: 3, name: '장보고', phone: '4312' },
+      ];
+      const updateUserDto = {
+        id: 2,
+        name: '장발산',
+      };
+
+      const newUsers = users.map((user) =>
+        user.id === updateUserDto.id ? { ...user, ...updateUserDto } : user,
+      );
+      console.log(newUsers);
+    </script>
+  </body>
+</html>
