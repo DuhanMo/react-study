@@ -26,7 +26,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <Header />
       {/* 넘어간 데이터를 (여기선 boards) props라고 한다 */}
       <Home
         boards={boards}
@@ -35,7 +34,6 @@ const HomePage = () => {
         setNumber={setNumber}
         user={user}
       />
-      <Footer />
     </div>
   );
 };
