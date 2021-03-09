@@ -15,7 +15,7 @@ function Header(props) {
     <div>
       <HeaderList>
         <ul>
-          <li>메뉴1</li>
+          <li>메뉴123</li>
           <li>메뉴2</li>
         </ul>
       </HeaderList>
