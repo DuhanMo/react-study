@@ -18,8 +18,8 @@ const Home = (props) => {
 
   return (
     <div>
-      <Button variant="primary">Primary</Button>
       <h1>홈:{number}</h1>
+      <Button variant="primary">Primary</Button>
       <StyledAddButton user={user}>더하기</StyledAddButton>
       <button onClick={() => setNumber(number + 1)}>번호증가</button>
       <StyledDeleteButton user={user} onClick={() => setBoards([])}>
