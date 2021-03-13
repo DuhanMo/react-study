@@ -66,6 +66,27 @@ public class BookControllerUnitTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    public void findAll_테스트() throws Exception {
+//        given
+        List<Book> books = new ArrayList<>();
+        books.add(new Book(1L, "스프링 따라잡기", "duhan"));
+        books.add(new Book(2L, "리액트 따라잡기", "duhan"));
+
+        when(bookService.모두가져오기()).thenReturn(books);
+//when
+        ResultActions resultAction = mockMvc.perform((get("/book"))
+            .accept(MediaType.APPLICATION_JSON_UTF8));
+
+        // then
+        resultAction
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$",Matchers.hasSize(2)))
+                .andExpect(jsonPath("$[0].title").value("스프링 따라잡기"))
+                .andDo(MockMvcResultHandlers.print());
+
+    }
+
 }
 
 

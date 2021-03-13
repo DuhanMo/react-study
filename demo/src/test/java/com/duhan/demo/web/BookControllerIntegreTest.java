@@ -1,8 +1,10 @@
 package com.duhan.demo.web;
 
 import com.duhan.demo.domain.Book;
+import com.duhan.demo.domain.BookRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,7 +15,11 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,6 +36,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BookControllerIntegreTest {
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private BookRepository bookRepository;
     @Test
     public void save_테스트() throws Exception {
         // given (테스트를 하기 위한 준비)
@@ -56,6 +65,27 @@ public class BookControllerIntegreTest {
                 .andExpect(status().isCreated()) //201을 기대한다
                 .andExpect(jsonPath("$.title").value( "스프링 따라하기")) // title이 스프링따라하기 가 맞는지 확인
                 .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void findAll_테스트() throws Exception {
+//        given
+        List<Book> books = new ArrayList<>();
+        books.add(new Book(null, "스프링 따라잡기", "duhan"));
+        books.add(new Book(null, "리액트 따라잡기", "duhan"));
+        books.add(new Book(null, "junit 따라잡기", "duhan"));
+        bookRepository.saveAll(books);
+//when
+        ResultActions resultAction = mockMvc.perform((get("/book"))
+                .accept(MediaType.APPLICATION_JSON_UTF8));
+
+        // then
+        resultAction
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", Matchers.hasSize(3)))
+                .andExpect(jsonPath("$[2].title").value("junit 따라잡기"))
+                .andDo(MockMvcResultHandlers.print());
+
     }
 
 }
