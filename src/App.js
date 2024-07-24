@@ -25,9 +25,14 @@ function App() {
       </div>
       <button onClick={() => {
         let copy = [...title];
-        copy[0] = '여자 코트 추천'
-        setTitle(copy)
+        copy[0] = '여자 코트 추천';
+        setTitle(copy);
       }}>게시글 변경</button>
+      <button onClick={() => {
+        let copy = [...title];
+        copy.sort();
+        setTitle(copy);
+      }}>가나다 정렬</button>
     </div>
   );
 }
