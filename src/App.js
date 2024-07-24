@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   let [title, setTitle] = useState(['남자 코트 추천', '강남 우동맛집', '파이썬 독학']);
-  let [likeCount, setLikeCount] = useState(0);
+  let [likeCount, setLikeCount] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
   let posts = '강남 우동 맛집'
   return (
@@ -12,18 +12,20 @@ function App() {
       <div className="black-nav">
         <h4>블로그</h4>
       </div>
-      <div className="list">
-        <h4 onClick={() => setModal(!modal)}>{title[0]} <span onClick={() => { setLikeCount(likeCount + 1) }}>👍</span> {likeCount} </h4>
-        <p>7월 24일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{title[1]} <span>👍</span> {likeCount} </h4>
-        <p>7월 24일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{title[2]} <span>👍</span> {likeCount} </h4>
-        <p>7월 24일 발행</p>
-      </div>
+      {
+        title.map(function (a, i) {
+          return (
+            <div className="list" key={i}>
+              <h4 onClick={() => setModal(!modal)}>{a}
+                <span onClick={() => {
+                  let copy = [...likeCount];
+                  copy[i]++;
+                  setLikeCount(copy)
+                }}>👍</span> {likeCount[i]} </h4>
+              <p>7월 24일 발행</p>
+            </div>)
+        })
+      }
       <button onClick={() => {
         let copy = [...title];
         copy[0] = '여자 코트 추천';
