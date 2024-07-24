@@ -5,6 +5,7 @@ import './App.css';
 function App() {
   let [title, setTitle] = useState(['남자 코트 추천', '강남 우동맛집', '파이썬 독학']);
   let [likeCount, setLikeCount] = useState(0);
+  let [modal, setModal] = useState(false);
   let posts = '강남 우동 맛집'
   return (
     <div className="App">
@@ -12,7 +13,7 @@ function App() {
         <h4>블로그</h4>
       </div>
       <div className="list">
-        <h4>{title[0]} <span onClick={() => { setLikeCount(likeCount + 1) }}>👍</span> {likeCount} </h4>
+        <h4 onClick={() => setModal(!modal)}>{title[0]} <span onClick={() => { setLikeCount(likeCount + 1) }}>👍</span> {likeCount} </h4>
         <p>7월 24일 발행</p>
       </div>
       <div className="list">
@@ -33,8 +34,20 @@ function App() {
         copy.sort();
         setTitle(copy);
       }}>가나다 정렬</button>
+      {
+        modal ? <Modal onClick={() => { setModal(false) }}></Modal> : null
+      }
     </div>
   );
 }
 
+function Modal() {
+  return (
+    <div className="modal">
+      <h4>제목</h4>
+      <p>날짜</p>
+      <p>상세 내용</p>
+    </div>
+  )
+}
 export default App;
