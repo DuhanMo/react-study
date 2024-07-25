@@ -6,7 +6,7 @@ function App() {
   let [title, setTitle] = useState(['남자 코트 추천', '강남 우동맛집', '파이썬 독학']);
   let [likeCount, setLikeCount] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
-  let posts = '강남 우동 맛집'
+  let [titleIndex, setTitleIndex] = useState(0);
   return (
     <div className="App">
       <div className="black-nav">
@@ -16,7 +16,7 @@ function App() {
         title.map(function (a, i) {
           return (
             <div className="list" key={i}>
-              <h4 onClick={() => setModal(!modal)}>{a}
+              <h4 onClick={() => { setModal(!modal); setTitleIndex(i); }}>{a}
                 <span onClick={() => {
                   let copy = [...likeCount];
                   copy[i]++;
@@ -37,16 +37,16 @@ function App() {
         setTitle(copy);
       }}>가나다 정렬</button>
       {
-        modal ? <Modal onClick={() => { setModal(false) }}></Modal> : null
+        modal ? <Modal title={title} titleIndex={titleIndex} onClick={() => { setModal(false) }}></Modal> : null
       }
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
-      <h4>제목</h4>
+      <h4>{props.title[props.titleIndex]}</h4>
       <p>날짜</p>
       <p>상세 내용</p>
     </div>
