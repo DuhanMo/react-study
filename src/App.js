@@ -17,7 +17,8 @@ function App() {
           return (
             <div className="list" key={i}>
               <h4 onClick={() => { setModal(!modal); setTitleIndex(i); }}>{a}
-                <span onClick={() => {
+                <span onClick={(e) => {
+                  e.stopPropagation();
                   let copy = [...likeCount];
                   copy[i]++;
                   setLikeCount(copy)
@@ -39,6 +40,7 @@ function App() {
       {
         modal ? <Modal title={title} titleIndex={titleIndex} onClick={() => { setModal(false) }}></Modal> : null
       }
+      <input onChange={(e) => {console.log(e.target.value);}}></input>
     </div>
   );
 }
