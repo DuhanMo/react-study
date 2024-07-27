@@ -7,6 +7,7 @@ function App() {
   let [likeCount, setLikeCount] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
   let [titleIndex, setTitleIndex] = useState(0);
+  let [input, setInput] = useState('');
   return (
     <div className="App">
       <div className="black-nav">
@@ -24,6 +25,11 @@ function App() {
                   setLikeCount(copy)
                 }}>👍</span> {likeCount[i]} </h4>
               <p>7월 24일 발행</p>
+              <button onClick={() => {
+                let copy = [...title];
+                copy.splice(i, 1);
+                setTitle(copy)
+              }}>삭제</button>
             </div>)
         })
       }
@@ -37,10 +43,15 @@ function App() {
         copy.sort();
         setTitle(copy);
       }}>가나다 정렬</button>
+      <input onChange={(e) => { setInput(e.target.value); }}></input>
+      <button onClick={() => {
+        let copy = [...title];
+        copy.unshift(input);
+        setTitle(copy)
+      }}>글발행</button>
       {
         modal ? <Modal title={title} titleIndex={titleIndex} onClick={() => { setModal(false) }}></Modal> : null
       }
-      <input onChange={(e) => {console.log(e.target.value);}}></input>
     </div>
   );
 }
