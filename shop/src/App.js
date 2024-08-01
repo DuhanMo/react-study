@@ -5,6 +5,7 @@ import data from "./data";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js"
 import About from "./routes/About.js"
+import Event from "./routes/Event.js"
 
 
 function App() {
@@ -40,17 +41,22 @@ function App() {
             </div>
           </>
         }></Route>
-        <Route path="/detail" element={<Detail />}></Route>
-        <Route path="/about" element={<About/>}>
+        <Route path="/detail/:id" element={<Detail shoesList={shoesList} />}></Route>
+        <Route path="/about" element={<About />}>
           <Route path="member" element={<div>멤버</div>}></Route>
           <Route path="location" element={<div>회사위치</div>}></Route>
+        </Route>
+        <Route path="/event" element={<Event />}>
+          <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>}></Route>
+          <Route path="two" element={<div>생일기념 쿠폰 밧기</div>}></Route>
         </Route>
         <Route path="*" element={<div>404</div>}></Route>
       </Routes>
       <Link to="/">홈</Link>
       <Link to="/detail">상세페이지</Link>
       <Link to="/about">어바웃페이지</Link>
-      <Button className="primary" onClick={() => navigate('detail')}>디테일 이동버튼</Button>
+      <Button className="primary" onClick={() => navigate('detail')}>디테일 페이지</Button>
+      <Button className="primary" onClick={() => navigate('event')}>이벤트 페이지</Button>
     </div>
   );
 }
