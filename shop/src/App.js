@@ -3,7 +3,9 @@ import './App.css';
 import { useState } from "react";
 import data from "./data";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
-import  Detail  from "./routes/Detail.js"
+import Detail from "./routes/Detail.js"
+import About from "./routes/About.js"
+
 
 function App() {
   let [shoesList] = useState(data);
@@ -38,14 +40,17 @@ function App() {
             </div>
           </>
         }></Route>
-        <Route path="/detail" element={<Detail/>}></Route>
-        <Route path="/about" element={<div>어바웃페이지</div>}></Route>
+        <Route path="/detail" element={<Detail />}></Route>
+        <Route path="/about" element={<About/>}>
+          <Route path="member" element={<div>멤버</div>}></Route>
+          <Route path="location" element={<div>회사위치</div>}></Route>
+        </Route>
         <Route path="*" element={<div>404</div>}></Route>
       </Routes>
       <Link to="/">홈</Link>
       <Link to="/detail">상세페이지</Link>
       <Link to="/about">어바웃페이지</Link>
-      <Button className="primary"onClick={()=>navigate('detail')}>디테일 이동버튼</Button>
+      <Button className="primary" onClick={() => navigate('detail')}>디테일 이동버튼</Button>
     </div>
   );
 }
