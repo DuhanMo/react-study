@@ -6,10 +6,11 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js"
 import About from "./routes/About.js"
 import Event from "./routes/Event.js"
+import axios from "axios";
 
 
 function App() {
-  let [shoesList] = useState(data);
+  let [shoesList, setShoesList] = useState(data);
   let navigate = useNavigate();
   return (
     <div>
@@ -57,6 +58,16 @@ function App() {
       <Link to="/about">어바웃페이지</Link>
       <Button className="primary" onClick={() => navigate('detail')}>디테일 페이지</Button>
       <Button className="primary" onClick={() => navigate('event')}>이벤트 페이지</Button>
+      <button onClick={()=>{
+      axios.get('https://codingapple1.github.io/shop/data2.json').then((response)=>{
+        console.log(response.data);
+        let copy = [...shoesList, ...response.data];
+        setShoesList(copy);
+      })
+      .catch(()=>{
+        console.log('실패함')
+      })
+    }}>버튼</button>
     </div>
   );
 }
